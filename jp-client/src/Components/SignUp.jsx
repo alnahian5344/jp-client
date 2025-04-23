@@ -10,7 +10,7 @@ const SignUP = () => {
         const phone = form.phone.value;
         const email = form.email.value;
         const password = form.password.value;
-        const user = { email, password };
+        const user = { name,phone,email, password };
         console.log(user);
         createUser(email, password)
             .then(result => {
@@ -19,6 +19,18 @@ const SignUP = () => {
             .catch(error => {
                 console.log(error.message);
             })
+
+            fetch('http://localhost:5000/jobuser',{
+                method:'POST',
+                headers:{
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(user)
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                console.log(data);
+            })
     }
     return (
 
@@ -26,7 +38,7 @@ const SignUP = () => {
             <div className="hero bg-base-200 min-h-[650px]">
                 <div className="hero-content flex flex-col">
                     <div className="text-center lg:text-left mb-6">
-                        <h1 className="text-4xl font-bold">Login now!</h1>
+                        <h1 className="text-4xl font-bold">Sign Up now!</h1>
                     </div>
                     <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
                         <div className="card-body">
