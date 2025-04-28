@@ -4,6 +4,8 @@ import {
 import Layouts from "../Layouts/Layouts";
  import Home from "../Components/Home";
 import SignUP from "../Components/SignUp";
+import SignIn from "../Components/SignIn";
+import Users from "../Components/Users";
 
 
   const router = createBrowserRouter([
@@ -17,6 +19,13 @@ import SignUP from "../Components/SignUp";
       {
         path:'signup',
         element: <SignUP></SignUP>,
+      },
+      {path: 'signin',
+        element: <SignIn></SignIn>,
+      },
+      {path:'users',
+        element: <Users></Users>,
+        loader: ()=>fetch('http://localhost:5000/users')
       },
     ]
     },

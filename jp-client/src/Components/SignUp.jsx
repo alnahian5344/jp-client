@@ -1,6 +1,9 @@
 import React, { useContext } from 'react';
 import AuthContext from '../context/AuthContext';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
+import signUpLottie from '../assets/signUpLottie.json'
+import Lottie from 'lottie-react';
 
 const SignUP = () => {
     const { createUser } = useContext(AuthContext);
@@ -79,36 +82,42 @@ const SignUP = () => {
     }
     return (
 
-        <div>
-            <div className="hero bg-base-200 min-h-[650px]">
-                <div className="hero-content flex flex-col">
-                    <div className="text-center lg:text-left mb-6">
-                        <h1 className="text-4xl font-bold">Sign Up now!</h1>
-                    </div>
-                    <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-                        <div className="card-body">
-                            <form onSubmit={handleSignUp}>
-                                <fieldset className="fieldset">
-                                    <label className="fieldset-label">Name</label>
-                                    <input type="text" name='name' className="input" placeholder="Name" />
+        <div className="hero bg-base-200 min-h-screen">
+            <div className="hero-content flex-col lg:flex-row-reverse w-full">
+                <div className="w-full max-w-md">
+                    <Lottie animationData={signUpLottie} loop={true} />
+                </div>
+                <div className="card bg-base-100 w-full max-w-sm shadow-2xl">
+                    <div className="card-body">
+                        <h1 className="text-3xl font-bold text-center mb-4">Sign Up now!</h1>
+                        <form onSubmit={handleSignUp}>
+                            <fieldset className="fieldset">
+                                <label className="label">Name</label>
+                                <input type="text" name="name" className="input input-bordered w-full" placeholder="Name" />
 
-                                    <label className="fieldset-label">Phone</label>
-                                    <input type="text" name='phone' className="input" placeholder="Phone" />
+                                <label className="label mt-4">Phone</label>
+                                <input type="text" name="phone" className="input input-bordered w-full" placeholder="Phone" />
 
-                                    <label className="fieldset-label">Email</label>
-                                    <input type="email" name='email' className="input" placeholder="Email" />
+                                <label className="label mt-4">Email</label>
+                                <input type="email" name="email" className="input input-bordered w-full" placeholder="Email" />
 
-                                    <label className="fieldset-label">Password</label>
-                                    <input type="password" name='password' className="input" placeholder="Password" />
-                                    <button className="btn btn-neutral mt-4">Sign Up/Register</button>
-                                </fieldset>
-                            </form>
-                        </div>
+                                <label className="label mt-4">Password</label>
+                                <input type="password" name="password" className="input input-bordered w-full" placeholder="Password" />
+
+                                <button className="btn btn-neutral w-full mt-6">Sign Up/Register</button>
+
+                                <p className="mt-4 text-center">
+                                    Already have an account?{" "}
+                                    <Link to="/signin" className="text-purple-500 font-bold">Sign In</Link>
+                                </p>
+                            </fieldset>
+                        </form>
                     </div>
                 </div>
 
             </div>
         </div>
+
     );
 };
 
