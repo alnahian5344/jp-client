@@ -1,8 +1,34 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import loginLottie from '../assets/loginLottie.json'
 import Lottie from 'lottie-react';
+import AuthContext from '../context/AuthContext';
+import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router";
+
 const SignIn = () => {
+    const { signInUser } = useContext(AuthContext);
+    let navigate = useNavigate();
+    const handleSignIn = async e => {
+        e.preventDefault();
+        const form = e.target;
+        const name = form.name.value;
+        const phone = form.phone.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        const user = { name, phone, email, password };
+        console.log(user);
+
+        signInUser(email, password)
+            .then(result => {
+                console.log(result);
+                if (result?.user) {
+                    console.log('object');
+                    navigate('/users')
+                }
+            })
+            .catch(error => { error.message })
+    }
     return (
         <div className="hero bg-base-200 min-h-screen">
             <div className="hero-content flex-col lg:flex-row-reverse w-full">
@@ -12,7 +38,7 @@ const SignIn = () => {
                 <div className="card bg-base-100 w-full max-w-sm shadow-2xl">
                     <div className="card-body">
                         <h1 className="text-3xl font-bold text-center mb-4">Log In Now</h1>
-                        <form  >
+                        <form onSubmit={handleSignIn} >
                             <fieldset className="fieldset">
                                 <label className="fieldset-label">Name</label>
                                 <input type="text" name='name' className="input" placeholder="Name" />
