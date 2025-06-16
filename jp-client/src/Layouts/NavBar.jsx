@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import AuthContext from '../context/AuthContext';
+import auth from '../Firebase/FireBase.init';
 
 const NavBar = () => {
+    const { user, signOutUser } = useContext(AuthContext);
     const links = <>
         <li><NavLink to="/users">Users</NavLink></li>
         <li><NavLink>Home</NavLink></li>
         <li><NavLink>Home</NavLink></li>
     </>
+
+    const signOut = () => {
+        signOutUser(auth)
+            .then(() => { console.log('Successfully Sign OUt'); })
+            .catch(error => { console.error(error.message); })
+
+    }
+
     return (
         <div className="navbar bg-base-100 shadow-sm">
             <div className="navbar-start">
@@ -28,9 +39,10 @@ const NavBar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <button className="btn"  >
-                    <Link to="/signup">Sign Up</Link>
-                </button>
+                {user ?
+                    <><button onClick={signOut} className="btn"  >Sign Out</button></> :
+                    <Link to="/signup"><button className="btn"  >Sign Up</button></Link>
+                }
             </div>
         </div>
     );

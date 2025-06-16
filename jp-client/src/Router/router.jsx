@@ -6,6 +6,7 @@ import Layouts from "../Layouts/Layouts";
 import SignUP from "../Components/SignUp";
 import SignIn from "../Components/SignIn";
 import Users from "../Components/Users";
+import JobsCards from "../Components/JobsCards";
 
 
   const router = createBrowserRouter([
@@ -25,7 +26,11 @@ import Users from "../Components/Users";
       },
       {path:'users',
         element: <Users></Users>,
-        loader: ()=>fetch('http://localhost:5000/users')
+        loader: ()=>fetch('http://localhost:5000/users'),
+      },
+      {
+        path:'jobs',
+        element:<JobsCards></JobsCards>,
       },
     ]
     },

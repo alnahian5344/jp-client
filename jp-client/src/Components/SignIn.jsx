@@ -17,13 +17,13 @@ const SignIn = () => {
         const email = form.email.value;
         const password = form.password.value;
         const user = { name, phone, email, password };
-        console.log(user);
+        // console.log(user);
 
         signInUser(email, password)
             .then(result => {
-                console.log(result);
+                console.log(result.user);
                 if (result?.user) {
-                    console.log('object');
+                    // console.log('object');
                     navigate('/users')
                 }
             })
